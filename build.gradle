@@ -52,15 +52,11 @@ def versionPropsFile = file('version.properties')
         } else {
             throw new FileNotFoundException("Could not read version.properties!")
         }
-    }
-    defaultConfig {
-        versionCode 1
-        versionName "1.0.0." + versionBuild
-    }
+  
     jar {
     baseName = 'spring-boot-gradle-example'             // jar file name
-    version =  '1.0' + versionBuild                                  // application version
-}
+    version =  '1.0' + versionBuild                    // application version
+    }
 
 
 
