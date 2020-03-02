@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
     @RequestMapping(value = "hello")
     public String hello(){
-        return "Spring boot Gradle Example";
+        return "Hello Honeywell. This is Spring boot Gradle Sample Project for POC";
     }
 }
