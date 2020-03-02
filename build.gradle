@@ -57,7 +57,7 @@ def versionPropsFile = file('version.properties')
     baseName = 'spring-boot-gradle-example'             // jar file name
     version =  '1.0' + versionBuild                    // application version
     }
-
+}
 
 
 
