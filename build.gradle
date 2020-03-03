@@ -59,5 +59,16 @@ def versionPropsFile = file('version.properties')
     }
 }
 
-
+uploadArchives {
+    repositories {
+       mavenDeployer {
+             repository(url: "http://104.211.230.20:8081/repository/demo/") {
+             authentication(userName: "admin", password: "password")
+}
+             pom.version = "0.1"
+             pom.artifactId = "1"
+             pom.groupId = "demo"
+       }
+    }
+}
 
