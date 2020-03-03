@@ -11,10 +11,10 @@ VOLUME /tmp
 EXPOSE 8081
 
 # The application's jar file
-ARG JAR_FILE=spring-boot-gradle-example-1.0-SNAPSHOT.jar
+ARG JAR_FILE=./jar/*
 
 # Add the application's jar to the container
-ADD ${JAR_FILE} app-demo.jar
+COPY ${JAR_FILE} app-demo.jar
 
 # Run the jar file 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app-demo.jar"]
