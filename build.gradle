@@ -26,7 +26,7 @@ sourceCompatibility = 1.8                               // for Java 1.8
 targetCompatibility = 1.8
 
 group 'spring-boot-demo'
-version '${BUILD_NUMBER}'
+version '$VERSION_NUMBER'
 
 def versionPropsFile = file('version.properties')
     def versionBuild
@@ -56,7 +56,7 @@ def versionPropsFile = file('version.properties')
   
     jar {
     baseName = 'spring-boot-gradle-example'             // jar file name
-    version =  ${BUILD_NUMBER}                    // application version
+    version =  $VERSION_NUMBER                    // application version
     }
 }
 
