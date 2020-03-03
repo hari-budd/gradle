@@ -15,6 +15,7 @@ description = "Spring boot Gradle Example"
 
 apply plugin: 'java'                                // plugin for java
 apply plugin: 'org.springframework.boot'            // plugin for spring boot framework
+apply plugin: 'maven'
 
 
 dependencies {
