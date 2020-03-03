@@ -26,7 +26,7 @@ sourceCompatibility = 1.8                               // for Java 1.8
 targetCompatibility = 1.8
 
 group 'spring-boot-demo'
-version '$VERSION_NUMBER'
+version '1.0'
 
 def versionFile = file('version.properties')
 ext.buildnum = new Properties([BUILD_NUMBER: "0"]);
