@@ -28,35 +28,23 @@ targetCompatibility = 1.8
 group 'spring-boot-demo'
 version '$VERSION_NUMBER'
 
-def versionPropsFile = file('version.properties')
-    def versionBuild
+def versionFile = file('version.properties')
+ext.buildnum = new Properties([BUILD_NUMBER: "0"]);
+if (versionFile.isFile()) {
+    versionFile.withReader { buildnum.load(it) }
+}
+def buildNumber = Integer.toString(Integer.parseInt(buildnum.BUILD_NUMBER) + 1)
+buildnum.BUILD_NUMBER = buildNumber
 
-    /*Setting default value for versionBuild which is the last incremented value stored in the file */
-    if (versionPropsFile.canRead()) {
-        def Properties versionProps = new Properties()
-        versionProps.load(new FileInputStream(versionPropsFile))
-        versionBuild = versionProps['VERSION_BUILD'].toInteger()
-    } else {
-        throw new FileNotFoundException("Could not read version.properties!")
-    }
+task('saveBuildNumber') {
+    doLast {
+    versionFile.withWriter { buildnum.store(it, "Automated build number increase") }
+}
+}
 
-
-    /*Wrapping inside a method avoids auto incrementing on every gradle task run. Now it runs only when we build apk*/
-    ext.autoIncrementBuildNumber = {
-
-        if (versionPropsFile.canRead()) {
-            def Properties versionProps = new Properties()
-            versionProps.load(new FileInputStream(versionPropsFile))
-            versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
-            versionProps['VERSION_BUILD'] = versionBuild.toString()
-            versionProps.store(versionPropsFile.newWriter(), null)
-        } else {
-            throw new FileNotFoundException("Could not read version.properties!")
-        }
-  
-    jar {
-    baseName = 'spring-boot-gradle-example'             // jar file name
-    version =  $VERSION_NUMBER                    // application version
+tasks.whenTaskAdded { task ->
+    if (task.name == 'build') {
+        task.dependsOn 'saveBuildNumber'
     }
 }
 
